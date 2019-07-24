@@ -13,8 +13,10 @@ if (require(pacman) == FALSE) {
 pacman::p_load(dplyr, readr, magrittr, caret)
 
 # data --------------------------------------------------------------------
+
 data <- read_csv("data/raw_data/train.csv")
 validation <- read_csv("data/raw_data/test.csv")
+gender_submission <- read_csv("data/raw_data/gender_submission.csv")
 # data types
 data %<>% 
   mutate(Survived = as.character(Survived),
@@ -22,6 +24,11 @@ data %<>%
          Pclass = as.character(Pclass)) %>% 
   select(-Name, -PassengerId, -Ticket, -Cabin)
   
+# add on test the expected predictions if alls girl had survived
+validation %>% 
+  left_join(gender_submission, by = "PassengerId") %>% 
+  rename(sugg_survived = Survived)
+
 
 # exploration -------------------------------------------------------------
 
