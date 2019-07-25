@@ -32,7 +32,8 @@ data %<>%
     status = str_replace_all(
       status, 
       c("Dona" = "Mrs.", "Martin\\(ElizabethL." = "", "Mlle." = "Miss.",
-        "Mme." = "Mrs.")),
+        "Mme." = "Mrs.", "Don" = "Mr.")),
+    status = as.factor(status),
     # columns with the family name of each passanger
     family_name = str_extract(Name, pattern = "\\..*$"),
     family_name = str_replace_all(
@@ -42,18 +43,4 @@ data %<>%
     # column with the sum of siblings/spouses and parents/sons aborad 
     total_family = SibSp + Parch
     )
-# 
-# # family in relation 
-# library(ggplot2)
-# data %>% 
-#   group_by(family_name) %>% 
-#   summarise(official_n_family = sum(SibSp), 
-#             same_famly_name = n(),
-#             check = official_n_family - same_famly_name) %>% 
-#   arrange(desc(check)) -> temp
-# 
-# temp %>% 
-#   ggplot() + 
-#     geom_histogram(aes(x = check), bins = 30) -> p1
-# 
-# plotly::ggplotly(p1)
+

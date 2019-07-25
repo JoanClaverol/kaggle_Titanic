@@ -18,12 +18,16 @@ gender_submission <- read_csv("data/raw_data/gender_submission.csv")
 data <- validation %>% 
   left_join(gender_submission, by = "PassengerId") %>% 
   bind_rows(train, .id = "id") %>% 
-  mutate(Survived = as.character(Survived),
-         Parch = as.character(Parch),
-         Pclass = as.character(Pclass),
-         PassengerId = as.integer(PassengerId),
-         SibSp = as.integer(SibSp),
-         id = if_else(id == 1, "train","validation")) 
+  mutate(
+    Survived = as.factor(Survived),
+    Parch = as.integer(Parch),
+    Pclass = as.factor(Pclass),
+    PassengerId = as.integer(PassengerId),
+    SibSp = as.integer(SibSp),
+    id = if_else(id == 1, "train","validation"),
+    Sex = as.factor(Sex),
+    Embarked = as.factor(Embarked), 
+    ) 
 
 
 # clean environment -------------------------------------------------------
