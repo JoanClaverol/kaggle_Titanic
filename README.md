@@ -26,3 +26,4 @@ Creation of new features to improve our model:
 
 Model
 -----
+Prediction of missing values for the Age column, function to automatize the model creation through caret and construction of the final model to predict survived or not. 

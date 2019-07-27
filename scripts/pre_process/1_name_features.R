@@ -33,8 +33,9 @@ data %<>%
     status = str_remove_all(status, pattern = "\\s"), 
     status = str_replace_all(
       status, 
-      c("Dona" = "Mrs.", "Martin\\(ElizabethL." = "", "Mlle." = "Miss.",
-        "Mme." = "Mrs.", "Don" = "Mr.", "\\."="")),
+      c("Dona" = "Mrs", "Martin\\(ElizabethL." = "", "Mlle." = "Miss",
+        "Mme." = "Mrs", "Don" = "Mr", "\\."="", "Ms" = "Miss",
+        "Lady|Countess|Capt|Col|Dr|Major|Rev|Sir|Jonkheer" = "Unkown")),
     status = as.factor(status),
     # columns with the family name of each passanger
     family_name = str_extract(Name, pattern = "\\..*$"),
@@ -42,7 +43,8 @@ data %<>%
       family_name,
       c("\\.\\s" = "","\\s\\(.*\\)" = "",'".*"' = "", '\\s"' = "",
         '"' = "")),
-    # column with the sum of siblings/spouses and parents/sons aborad 
-    total_family = SibSp + Parch
+    # column with the sum of siblings/spouses and parents/sons aborad + the own
+    # passanger
+    total_family = SibSp + Parch + 1
     )
 

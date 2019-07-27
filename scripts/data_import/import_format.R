@@ -24,10 +24,10 @@ data <- validation %>%
     Pclass = as.factor(Pclass),
     PassengerId = as.integer(PassengerId),
     SibSp = as.integer(SibSp),
-    id = if_else(id == 1, "train","validation"),
+    id = if_else(id == 1, "validation","train"),
     Sex = as.factor(Sex),
     Embarked = as.factor(Embarked), 
-    ) 
+  ) 
 
 
 # clean environment -------------------------------------------------------
