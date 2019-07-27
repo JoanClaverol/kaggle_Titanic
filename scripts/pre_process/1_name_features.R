@@ -2,6 +2,8 @@
 # GOAL: feature engineering
 # DEFINITION: define new variables like:
 # - married or not
+# - name of the family
+# - total number of familiars on board
 # -------------------------------------------------------------------------
 
 # libraries ---------------------------------------------------------------
@@ -26,13 +28,13 @@ source("scripts/data_import/import_format.R")
 data %<>% 
   mutate(
     # create a variable with the status of each passanger
-    status = str_extract(Name, pattern = "\\s.*\\."),
+    status = str_extract(Name, pattern = " ([A-Za-z]+)\\."),
     status = str_replace(status, pattern = ".*, ", replacement = ""),
     status = str_remove_all(status, pattern = "\\s"), 
     status = str_replace_all(
       status, 
       c("Dona" = "Mrs.", "Martin\\(ElizabethL." = "", "Mlle." = "Miss.",
-        "Mme." = "Mrs.", "Don" = "Mr.")),
+        "Mme." = "Mrs.", "Don" = "Mr.", "\\."="")),
     status = as.factor(status),
     # columns with the family name of each passanger
     family_name = str_extract(Name, pattern = "\\..*$"),
