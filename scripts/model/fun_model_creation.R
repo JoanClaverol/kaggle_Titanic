@@ -44,7 +44,7 @@ modalization <- function(data, p_partition, cv_repeats, cv_number,
   print(postResample(pred = train_results, obs = train[[x]]))
   print("TEST metrics:")
   print(postResample(pred = test_results, obs = test[[x]]))
-          
+  
   # return the model
   return(mod)
   }
