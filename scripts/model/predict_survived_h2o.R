@@ -1,5 +1,7 @@
 # -------------------------------------------------------------------------
 # GOAL: create a model to predict age with H2O package
+# CONCLUSION: the model overfits the training data, and has a bad performance 
+# on kaggle competition
 # -------------------------------------------------------------------------
 
 # libraries ---------------------------------------------------------------
